@@ -1,0 +1,41 @@
+.app-launch-container {
+  display: flex;
+  margin: auto;
+  max-width: 400px;
+}
+
+.title-paper {
+  margin-top: 50px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.username-paper{
+  padding: 10px;
+  width: 80%;
+  margin: auto;
+}
+
+.username-input {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.connect-container{
+  padding: 20px;
+}
+
+.launch-screen-connect-button{
+  width: 100%;
+}
+
+.loadingBox{
+  display: flex;
+  align-items: center;
+  margin: auto;
+  flex-direction: column;
+  max-width: 400px;
+  padding: 20px;
+  margin-top: 100px;
+  }
