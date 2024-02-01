@@ -1,6 +1,6 @@
 {
-  "name": "electron-react-typescript-webpack-2023",
-  "productName": "ERWT Boilerplate",
+  "name": "tik-tok-live-stream-stats",
+  "productName": "TikTok Stream Stats",
   "version": "7.3.2",
   "description": "Custom boilerplate for writing Desktop Applications using Electron, React, Webpack, TypeScript in 2023",
   "main": ".webpack/main",
@@ -12,29 +12,18 @@
     "lint": "eslint src/ --ext .ts,.js,.tsx,.jsx"
   },
   "keywords": [
-    "electron boilerplate",
-    "minimal",
-    "electron-webpack",
-    "electron-react",
-    "electron-typescript",
-    "hmr",
-    "boilerplate",
-    "2023",
-    "ERWT"
+    "tiktok",
+    "tiktok-live",
+    "tiktok-live-stats",
+    "tikt-tok-streaming"
   ],
   "author": {
-    "name": "codesbiome",
-    "url": "https://github.com/codesbiome"
+    "name": "llamaXc",
+    "url": "https://github.com/llamaXc"
   },
-  "contributors": [
-    {
-      "name": "guasam",
-      "url": "https://github.com/guasam"
-    }
-  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/codesbiome/electron-react-webpack-typescript-2023"
+    "url": "https://github.com/llamaXc/tiktok-live-stream-stats"
   },
   "license": "MIT",
   "config": {

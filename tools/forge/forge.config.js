@@ -3,15 +3,10 @@ const path = require('path');
 const rootDir = process.cwd();
 
 module.exports = {
-  // Packager Config
   packagerConfig: {
-    // Create asar archive for main, renderer process files
     asar: true,
-    // Set executable name
-    executableName: 'ERWT Boilerplate',
-    // Set application copyright
-    appCopyright: 'Copyright (C) 2021 Codesbiome, Guasam',
-    // Set application icon
+    executableName: 'TikTok Live Stream Stats',
+    appCopyright: 'Copyright (C) 2023 llamaXc, Github',
     icon: path.resolve('assets/images/appIcon.ico'),
   },
   // Forge Makers
@@ -21,7 +16,7 @@ module.exports = {
       // Windows applications and is therefore the most user friendly you can get.
       name: '@electron-forge/maker-squirrel',
       config: {
-        name: 'electron-react-typescript-webpack-2022',
+        name: 'tik-tok-live-stream-stats',
       },
     },
     {
