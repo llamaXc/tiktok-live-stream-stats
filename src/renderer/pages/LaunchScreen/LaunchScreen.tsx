@@ -81,6 +81,7 @@ const LaunchScreen: React.FC<AppLaunchPageProps> = () => {
               <Typography variant="h5">        
                 TikTok Stream Portal
               </Typography>
+              <p>Version 0.2</p>
           </Grid>
 
           <Grid className="username-paper">

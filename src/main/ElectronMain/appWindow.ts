@@ -1,12 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
-import TiktokLiveWrapper from './tiktok'
+import TiktokLiveWrapper from '../TikTokConnector/tiktok'
 
 declare const APP_WINDOW_WEBPACK_ENTRY: string;
 declare const APP_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 let appWindow: BrowserWindow;
+let tiktokConnection: TiktokLiveWrapper = null;
+
+app.on('before-quit', () => {
+  if (tiktokConnection != null){
+    tiktokConnection.disconnect()
+  }
+  tiktokConnection = null
+})
 
 export function createAppWindow(): BrowserWindow {
   appWindow = new BrowserWindow({
@@ -27,8 +35,6 @@ export function createAppWindow(): BrowserWindow {
   appWindow.setMinimumSize(1200,600)
 
   appWindow.loadURL(APP_WINDOW_WEBPACK_ENTRY);
-
-  let tiktokConnection: TiktokLiveWrapper = null;
   
   ipcMain.on('connect', (event, payload) => {
     const request = JSON.parse(payload)
@@ -39,6 +45,7 @@ export function createAppWindow(): BrowserWindow {
   ipcMain.on('disconnect', (event, payload) => {
     tiktokConnection.disconnect()
     tiktokConnection = null
+
   })
 
   appWindow.on('ready-to-show', () => appWindow.show());

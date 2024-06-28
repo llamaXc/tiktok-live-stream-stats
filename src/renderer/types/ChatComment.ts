@@ -1,13 +1,26 @@
+
+
+export interface TikTokAccountInformation {
+    displayName: string,
+    uniqueId: string,
+    followers: number,
+    followsHost: boolean,
+    topGifterRank: number,
+    profilePictureUrl: string,
+}
+
+export interface StreamUserData{
+    likes: number,
+    comments: number,
+    shares: number,
+    giftValue: number,
+    accountInfo: TikTokAccountInformation,
+    latestInteraction: number,
+}
+
 export interface ChatComment {
     message: string
-    nickname: string,
-    uniqueId: string,
-    profilePicture: string
-    followRole: number,
-    followInfo: {
-        followingCount: number,
-        followerCount: number,
-        followStatus: number,
-        pushStatus: number
-    }
+    timestamp: number,
+    userProfile: StreamUserData
 }
+

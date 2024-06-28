@@ -7,6 +7,7 @@ import { Container, Box, Typography } from '@mui/material';
 
 interface LineChartProps{
     minuteData: any[],
+    clampYAxisValues?: boolean,
 }
 
 
@@ -41,27 +42,48 @@ const CustomXAxisTick = (props: any) => {
     }else if(payload.value < 1000000){
         displayValue = (payload.value / 1000).toFixed() + "K"
     }else{
-        displayValue = (payload.value / 100000000).toFixed() + "M"
+        displayValue = (payload.value / 1000000).toFixed(1) + "M"
     }
     return <text x={x} y={y} dy={16} textAnchor="end" fill="#666">{`${displayValue}`}</text>;
   };
 
 
 const numTicks = 10
-const BasicLineChart: React.FC<LineChartProps> = ({minuteData}) => {
+
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+
+
+
+    if (active && payload && payload.length) {
+
+        const dataPoint = payload[0];
+
+        return (
+            <div className="custom-tooltip">
+            <p>{`Value: ${Math.floor(dataPoint.value)}`}</p>
+            </div>
+        );
+    }
+    return null;
+  };
+
+const BasicLineChart: React.FC<LineChartProps> = ({minuteData, clampYAxisValues=false}) => {
 
     if (minuteData.length === 0){
         return (
         <Container >
-            <Typography>Fetching data... may take up to 1 minute</Typography>
+            <Typography>Waiting for event from TikTok</Typography>
         </Container>
         )
     }
+
     return (
         <>
-            <ResponsiveContainer style={{padding: "0px", marginLeft: "-50px"}}>
+            <ResponsiveContainer style={{padding: "0px", marginLeft: "10px"}}>
                 <AreaChart data={minuteData}>
                     <YAxis  tick={<CustomYAxisTick />}/>
+                    <Tooltip content={<CustomTooltip />} />
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="timestamp"  interval={Math.round(minuteData.length / numTicks)} tick={<CustomXAxisTick />}/>
                     <Area isAnimationActive={false} type="monotone" dataKey="value" stroke="#8884d8" />

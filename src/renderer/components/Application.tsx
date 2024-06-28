@@ -10,6 +10,7 @@ import setupICPListeners from '../utils/ipcListeners'
 import { ThemeProvider } from '@mui/material/styles';
 import theme from "../themes/retro"
 import StatsDashboardView from '@renderer/pages/WindowViews/MainDashboard/StatsDashboardView';
+import { VRDashboard } from '@renderer/pages/WindowViews/VRDashboard/VRDashboard';
 
 const Application: React.FC = () => {
 
@@ -23,7 +24,7 @@ const Application: React.FC = () => {
         <Routes >
             <Route path="/" element={<LaunchScreen/>} />
             <Route path="/dashboard" element={<Dashboard title="Dashboard" ><StatsDashboardView/></Dashboard>}/>
-            <Route path="/dashboard-vr" element={<Dashboard title="VR"><h1>VR</h1></Dashboard>}/>
+            <Route path="/dashboard-vr" element={<Dashboard title="VR"><VRDashboard/></Dashboard>}/>
             <Route path="/dashboard-scoreboard"  element={<Dashboard title="Scoreboard"><h1>Scoreboard</h1></Dashboard>}/>
             <Route path="/*" element={<p>No page found</p>}/>
         </Routes >
