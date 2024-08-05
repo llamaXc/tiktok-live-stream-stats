@@ -7,7 +7,7 @@ TikTok Live Stream Stats is a project that provides live stream statistics for T
 You can download as an exe from the release tab to the right, or build locally using Electron and NPM
 
 **One click**
-1. One click install, this will install the application on your PC and can be removed using add/remove applications
+1. [One click install using the latest release](https://github.com/llamaXc/tiktok-live-stream-stats/releases/tag/V0.0.2), install the setup exe file and launch the application
 
 **Developer Instllation if you want to modify and build locally**
 1. Clone the repository:
