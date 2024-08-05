@@ -18,11 +18,12 @@ You can download as an exe from the release tab to the right, or build locally u
 2. Install dependecies:
    ```bash
    cd tiktok-live-stream-stats && npm install
+   ```
 
 3. Run the application:
   ```bash
   npm start
-
+ ```
 
 **Pictures**
 ![homepage](https://github.com/llamaXc/tiktok-live-stream-stats/assets/11560596/a1253cd1-a72a-40fa-bea8-f5ee329884ef)
