@@ -6,6 +6,8 @@ TikTok Live Stream Stats is a project that provides live stream statistics for T
 
 ![homepage](https://github.com/llamaXc/tiktok-live-stream-stats/assets/11560596/a1253cd1-a72a-40fa-bea8-f5ee329884ef)
 
+![Dashboard](https://github.com/user-attachments/assets/0f8ffd92-2bdf-4742-8c77-517af4eead89)
+
 ## Getting Started
 
 ### Installation
