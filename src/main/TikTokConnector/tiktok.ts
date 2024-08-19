@@ -100,14 +100,21 @@ export default class TiktokWrapper {
     }
 
     connect(){
+   
         console.log("Attempting to connect to: " + this.uniqueId)
         this.tiktokLiveConnection = new TikTokConnectionWrapper(this.uniqueId, {}, true);
 
-        this.tiktokLiveConnection.connect(false);
-        this.connected = true
-        appWindow.webContents.send('change-location', '/dashboard')
-        this.setupIPCListeners()
+        this.tiktokLiveConnection.on('disconnected', (e) => {
+            appWindow.webContents.send('user_not_found', this.uniqueId)
+        })
 
+        this.tiktokLiveConnection.on('connected', (e) => {
+            this.connected = true
+            appWindow.webContents.send('change-location', '/dashboard')
+            this.setupIPCListeners()
+        })
+
+        this.tiktokLiveConnection.connect(false);
     }
 
     setupIPCListeners(){

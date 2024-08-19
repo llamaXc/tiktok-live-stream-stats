@@ -4,7 +4,7 @@
 // AppLaunchPage.tsx
 
 import React, { useState, useEffect } from 'react';
-import { Typography, TextField, Button, Grid, Alert } from '@mui/material';
+import { Typography, TextField, Button, Grid, Alert, Snackbar  } from '@mui/material';
 import './LaunchScreen.scss'; // Import the SCSS file for styling
 import {connectToTikTok} from './api'
 import CircularProgress from '@mui/material/CircularProgress';
@@ -30,6 +30,8 @@ const LaunchScreen: React.FC<AppLaunchPageProps> = () => {
     const [randomSentence, setRandomSentence] = useState(
       loadingSentences[0]
     );
+    const [showToast, setShowToast] = useState<boolean>(false);
+    const [toastMessage, setToastMessage] = useState<string>('');
 
     const { latestErrorMessage, setConnectedUsername, dismissErrorMessage } = storeState();
 
@@ -45,6 +47,14 @@ const LaunchScreen: React.FC<AppLaunchPageProps> = () => {
     }, [connecting, randomSentence]);
 
     const handleConnect = () => {
+
+      const ipcRenderer = (window as any).ipcRenderer
+      ipcRenderer.on("user_not_found", (username: string) => {
+        setConnecting(false)
+        setToastMessage(`User "${username}" not found`);
+        setShowToast(true);
+      })
+
       setConnecting(true)
       connectToTikTok(username)
       setConnectedUsername(username);
@@ -66,6 +76,10 @@ const LaunchScreen: React.FC<AppLaunchPageProps> = () => {
       </Paper>
     )
   }
+
+  const handleToastClose = () => {
+    setShowToast(false);
+  };
 
   return (
     <>
@@ -114,6 +128,14 @@ const LaunchScreen: React.FC<AppLaunchPageProps> = () => {
       <div style={{width: "100%", margin: "0px", height: "200px"}}>
         <AnimatedChart/>
       </div>
+
+      <Snackbar
+        open={showToast}
+        autoHideDuration={3000}
+        onClose={handleToastClose}
+        message={toastMessage}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      />
     </>
   );
 };
