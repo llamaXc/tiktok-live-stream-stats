@@ -14,7 +14,7 @@ interface ChatCommentProps{
   startTimestamp: number
 }
 
-const COMMENT_AGE_SECONDS = 20
+const COMMENT_AGE_SECONDS = 120
 
 const ChatComment: React.FC<ChatCommentProps>= ({index, startTimestamp, comment}) => {
 

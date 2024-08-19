@@ -48,7 +48,7 @@ module.exports = {
         // Remove 'unsafe-eval' to get rid of console warning in development mode.
         devContentSecurityPolicy: "default-src 'self' 'unsafe-eval' 'unsafe-inline' blob: static: http: https: ws:", // <--- this line
         // Ports
-        port: 3000, // Webpack Dev Server port
+        port: 3005, // Webpack Dev Server port
         loggerPort: 9000, // Logger port
         // Main process webpack configuration
         mainConfig: path.join(rootDir, 'tools/webpack/webpack.main.js'),

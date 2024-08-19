@@ -1,12 +1,12 @@
 {
   "name": "tik-tok-live-stream-stats",
   "productName": "TikTok Stream Stats",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Custom boilerplate for writing Desktop Applications using Electron, React, Webpack, TypeScript in 2023",
   "main": ".webpack/main",
   "scripts": {
     "start": "cross-env NODE_ENV=development electron-forge start",
-    "package": "electron-forge package",
+    "package": "electron-packager . TiktokStreamManager --platform win32 --arch x64 --out ./out --overwrite --portable",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint src/ --ext .ts,.js,.tsx,.jsx"
