@@ -4,6 +4,7 @@ import {appWindow} from '../ElectronMain/appWindow'
 import { TikTokConnectionWrapper } from './TikTokWrapper';
 import {calculateAverage} from "../utils/math"
 import { UserDatabase } from './TIktokUserDatabase';
+import UDPSender from './tiktokUDPExporter';
 
 export default class TiktokWrapper {
     uniqueId: string;
@@ -25,8 +26,10 @@ export default class TiktokWrapper {
 
     UserDB: UserDatabase
 
+    exporter: UDPSender
+
     emitMetrics(){
-        if (this.connected ){
+        if (this.connected && appWindow && appWindow.webContents){
             if (this.latestViewValues.length > 0){
                 const avg = calculateAverage(this.latestViewValues)
                 this.latestViewValues = []
@@ -69,6 +72,13 @@ export default class TiktokWrapper {
                 timestamp: new Date()
             }
             appWindow.webContents.send('chatMinuteData', payloadChat)
+
+
+            this.exporter.sendStatsData(
+                    this.latestTotalLikes ? this.latestTotalLikes : 0,
+                    this.latestFollwersGained ? this.latestFollwersGained : 0,
+                    this.latestChatTotal ? this.latestChatTotal : 0,
+            )
         }
     }
 
@@ -97,6 +107,7 @@ export default class TiktokWrapper {
 
         this.connected = false
         this.UserDB = new UserDatabase()
+        this.exporter = new UDPSender(5599, "localhost")
     }
 
     connect(){
@@ -118,6 +129,7 @@ export default class TiktokWrapper {
                 userProfile: userStreamData,
                 timestamp: Date.now()
             }
+            // this.exporter.sendFollowEvent(data.uniqueId, data.followInfo.followerCount)
 
             this.latestChatTotal += 1
             appWindow.webContents.send('chat', payload)
@@ -155,6 +167,7 @@ export default class TiktokWrapper {
 
                 this.UserDB.updateLikeCountForUser(uniqueId, _data)
                 appWindow.webContents.send('like', {totalLikes: totalLikeCount})
+
             }
         })
 
@@ -186,6 +199,10 @@ export default class TiktokWrapper {
             if (isFollow){
                 this.latestFollwersGained += 1
                 this.latestTotalFollowers += 1
+                console.log(msg)
+
+                this.exporter.sendFollowEvent(msg.uniqueId, msg.followInfo.followerCount)
+
                 appWindow.webContents.send('followEvent', 
                 {    
                     uniqueId: msg.uniqueId,
