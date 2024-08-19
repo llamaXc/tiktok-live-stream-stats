@@ -73,12 +73,14 @@ export default class TiktokWrapper {
     }
 
     emitSecondMetrics(){
-        const payloadMember = {
-            value: this.latestMemberJoined,
-            timestamp: new Date()
+        if (this.connected){
+            const payloadMember = {
+                value: this.latestMemberJoined,
+                timestamp: new Date()
+            }
+            this.latestMemberJoined = 0
+            appWindow.webContents.send('memberMinuteDataPoint', payloadMember)
         }
-        this.latestMemberJoined = 0
-        appWindow.webContents.send('memberMinuteDataPoint', payloadMember)
     }
 
     constructor(username: string){
